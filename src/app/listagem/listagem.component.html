@@ -4,11 +4,14 @@
 <main class="container">
     <div class="row mb-4">
         <form class="col-12">
-            <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+            <span class="input-group-prepend">
+                <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+            </span>
+            <input (input)="true" #inputBusca type="search" class="form-control" placeholder="filtrar pelo título da foto">
         </form>
     </div>
     <div class="row">
-        <app-card *ngFor="let foto of listaFotos" [foto]="foto" class="col-md-4">
+        <app-card *ngFor="let foto of listaFotos| filtroPorTitulo:inputBusca.value" [foto]="foto" class="col-md-4">
             <a [routerLink]="['/editar', foto._id]" class="foto">
                 <app-foto [url]="foto.url" [titulo]="foto.titulo"></app-foto>
             </a>
