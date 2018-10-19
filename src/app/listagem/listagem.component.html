@@ -1,0 +1,20 @@
+<header class="jumbotron">
+    <h1 class="text-center">CaelumPic</h1>
+</header>
+<main class="container">
+    <div class="row mb-4">
+        <form class="col-12">
+            <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+        </form>
+    </div>
+    <div class="row">
+        <app-card *ngFor="let foto of listaFotos" [foto]="foto" class="col-md-4">
+            <a [routerLink]="['/editar', foto._id]" class="foto">
+                <app-foto [url]="foto.url" [titulo]="foto.titulo"></app-foto>
+            </a>
+            <button class="btn btn-danger" (click)="deletar(foto)">
+                Apagar
+            </button>
+        </app-card>
+    </div>
+</main>
