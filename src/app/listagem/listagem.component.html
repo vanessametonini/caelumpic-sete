@@ -3,12 +3,14 @@
 </header>
 <main class="container">
     <div class="row mb-4">
-        <form class="col-12">
-            <span class="input-group-prepend">
-                <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
-            </span>
-            <input (input)="true" #inputBusca type="search" class="form-control" placeholder="filtrar pelo título da foto">
-        </form>
+        <div class="col-sm-12">
+            <form class="input-group">
+                <span class="input-group-prepend">
+                    <a routerLink="/cadastro" class="btn btn-primary">Nova Foto</a>
+                </span>
+                <input (input)="true" #inputBusca type="search" class="form-control" placeholder="filtrar pelo título da foto">
+            </form>
+        </div>
     </div>
     <div class="row">
         <app-card *ngFor="let foto of listaFotos| filtroPorTitulo:inputBusca.value" [foto]="foto" class="col-md-4">
