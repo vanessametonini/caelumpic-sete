@@ -41,7 +41,7 @@ A CLI faz perguntas agora:
 você quer adicionar um módulo de roteamento?  
 `[y/N]`  
 qual tipo de css vc quer usar?  
-CSS/SCSS/SASS/LESS/Stylus
+CSS/SCSS/SASS/LESS/Stylus  
 `[enter]`  
 
 ### 3
@@ -49,7 +49,9 @@ Criou o **app-routing.module.ts**, importa em **AppModule**, e em **app.componen
 
 ### 4
 O router módule pode ser feito depois com o generate  
-`ng generate module --routing=true --routingScope=Root`  
+```
+ng generate module --routing=true --routingScope=Root
+```
 os defaults são `false`, e `Child`
 
 ### 5
