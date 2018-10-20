@@ -29,3 +29,32 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## API
 
 This project depends of an API [CaelumPic Server](https://github.com/caelum/caelumpic-server)
+
+## Analise de impacto no curso da versão 7 do Angular e CLI
+
+### 1 
+`ng -v` virou `ng version`
+
+### 2
+`ng new caelum`
+A CLI faz perguntas agora:  
+você quer adicionar um módulo de roteamento?  
+`[y/N]`  
+qual tipo de css vc quer usar?  
+CSS/SCSS/SASS/LESS/Stylus
+`[enter]`  
+
+### 3
+Criou o **app-routing.module.ts**, importa em **AppModule**, e em **app.component.html** já vem o a tag `<router-outlet></router-outlet>`
+
+### 4
+O router módule pode ser feito depois com o generate  
+`ng generate module --routing=true --routingScope=Root`  
+os defaults são `false`, e `Child`
+
+### 5
+Arrumar Schematics para sempre deixar templates inline, e depois se quiser mudar passar como argumento para a CLI:  
+```
+ng g c cadastro -t false
+```
+Vai gerar um arquivo .html para template
