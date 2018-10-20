@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { Mensagem } from './mensagem';
 
 @Component({
   selector: 'app-mensagem',
-  template: `<p class="alert alert-{{tipo}}"><ng-content></ng-content></p>`,
+  templateUrl: './mensagem.component.html',
   styles: []
 })
 export class MensagemComponent {
 
-  @Input() tipo = 'info';
-
-  constructor(){}
+  @Input('dados') mensagem = new Mensagem();
 
 }

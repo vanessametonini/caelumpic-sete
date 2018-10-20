@@ -8,7 +8,7 @@ import { ListagemComponent } from './listagem/listagem.component';
 import { CardComponent } from './card/card.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FiltroPorTituloPipe } from './listagem/filtro-por-titulo.pipe';
 import { MensagemComponent } from './mensagem/mensagem.component';
 
@@ -26,7 +26,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

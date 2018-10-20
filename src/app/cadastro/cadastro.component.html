@@ -2,21 +2,35 @@
   <h1 class="text-center">Cadastro</h1>
 </header>
 <main class="container">
+  <div class="row" *ngIf="mensagem.texto">
+    <div class="col-12">
+      <app-mensagem [dados]="mensagem"></app-mensagem>
+    </div>
+  </div>
   <div class="row">
-    <form #formCadastro="ngForm" class="col-md-7 mb-4" (ngSubmit)="salvar()">
+    <form [formGroup]="formCadastro" class="col-md-7 mb-4" (ngSubmit)="salvar()" (input)="updateControls()">
       <div class="form-group">
         <label for="titulo">Titulo</label>
-        <input #titulo="ngModel" required [(ngModel)]="foto.titulo" name="titulo" id="titulo" type="text" class="form-control">
-        <app-mensagem tipo="danger" *ngIf="titulo.invalid">Campo obrigatório</app-mensagem>
+        <input formControlName="titulo" required id="titulo" type="text" class="form-control">
+        <div *ngIf="formControls.titulo.invalid && formControls.titulo.touched">
+          <app-mensagem [dados]="{tipo: 'danger'}" *ngIf="formControls.titulo.errors?.required">
+            Campo obrigatório
+          </app-mensagem>
+          <app-mensagem [dados]="{tipo: 'danger'}" *ngIf="formControls.titulo.errors?.minlength">
+            Minímo de {{formControls.titulo.errors?.minlength.requiredLength}} caracteres
+          </app-mensagem>
+        </div>
       </div>
       <div class="form-group">
         <label for="url">Url</label>
-        <input #url="ngModel" required [(ngModel)]="foto.url" name="url" id="url" type="text" class="form-control">
-        <app-mensagem tipo="danger" *ngIf="url.invalid">Campo obrigatório</app-mensagem>
+        <input formControlName="url" required id="url" type="text" class="form-control">
+        <app-mensagem [dados]="{tipo: 'danger'}" *ngIf="formControls.url.invalid && formControls.url.touched">
+          Campo obrigatório
+        </app-mensagem>
       </div>
       <div class="form-group">
         <label for="descricao">Descricao</label>
-        <textarea [(ngModel)]="foto.descricao" name="descricao" id="descricao" class="form-control"></textarea>
+        <textarea formControlName="descricao" id="descricao" class="form-control"></textarea>
       </div>
       <a routerLink="" class="btn btn-secondary">Voltar</a>
       <button [disabled]="formCadastro.invalid" class="btn btn-primary">Salvar</button>

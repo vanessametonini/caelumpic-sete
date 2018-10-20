@@ -1,0 +1,6 @@
+<p class="alert alert-{{mensagem.tipo}}">
+    <ng-content *ngIf="!mensagem.texto; else conteudo"></ng-content>
+    <ng-template #conteudo>
+        {{mensagem.texto}}
+    </ng-template>
+</p>

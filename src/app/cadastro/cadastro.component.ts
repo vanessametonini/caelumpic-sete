@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Foto } from '../foto/foto';
 import { FotoService } from '../servicos/foto.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { Mensagem } from '../mensagem/mensagem';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,12 +13,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CadastroComponent implements OnInit {
 
   foto = new Foto();
+  formCadastro = new FormGroup({});
+
+  formControls = {
+    titulo: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.minLength(5)
+    ])),
+    url: new FormControl('', Validators.required),
+    descricao: new FormControl('')
+  }
+
+  mensagem = new Mensagem();
 
   constructor(private servico: FotoService,
               private rotaAtivada: ActivatedRoute,
               private roteador: Router) {}
 
   ngOnInit() {
+
+    this.formCadastro = new FormGroup(this.formControls);
+
     this.rotaAtivada.params.subscribe(
       parametros => {
         let id = parametros.fotoId
@@ -27,7 +44,7 @@ export class CadastroComponent implements OnInit {
               .subscribe(
                 fotoApi => {
                   this.foto = fotoApi;
-                  this.foto = new Foto();
+                  this.formCadastro.patchValue(fotoApi);
                 }
               )
         }
@@ -35,15 +52,23 @@ export class CadastroComponent implements OnInit {
     )
   }
 
+  updateControls(){
+    this.foto = { ...this.foto, ...this.formCadastro.value }
+  }
+
   salvar(){
-    
+
     if(this.foto._id){
       this.servico
           .atualizar(this.foto)
           .subscribe(
               () => {
-                console.log(`${this.foto.titulo} atualizada com sucesso`);
-                this.roteador.navigate([''])
+                this.mensagem = {
+                  tipo: 'success',
+                  texto: `${this.foto.titulo} atualizada com sucesso`
+                }
+                
+                setTimeout(() => this.roteador.navigate(['']), 3000)
               }
           )
     }
@@ -51,7 +76,15 @@ export class CadastroComponent implements OnInit {
       this.servico
           .cadastrar(this.foto)
           .subscribe(
-            () => console.log(`${this.foto.titulo} cadastrada com sucesso`)
+            () => {
+              this.mensagem = {
+                tipo: 'success',
+                texto: `${this.foto.titulo} cadastrada com sucesso`
+              }
+              this.formCadastro.reset();
+              
+              setTimeout(() => this.mensagem = new Mensagem(), 3000)
+            }
           )
     }
   }
