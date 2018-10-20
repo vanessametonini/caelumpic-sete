@@ -25,7 +25,10 @@ export class CadastroComponent implements OnInit {
           this.servico
               .buscar(id)
               .subscribe(
-                fotoApi => this.foto = fotoApi
+                fotoApi => {
+                  this.foto = fotoApi;
+                  this.foto = new Foto();
+                }
               )
         }
       }

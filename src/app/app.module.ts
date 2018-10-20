@@ -10,6 +10,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { FiltroPorTituloPipe } from './listagem/filtro-por-titulo.pipe';
+import { MensagemComponent } from './mensagem/mensagem.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FiltroPorTituloPipe } from './listagem/filtro-por-titulo.pipe';
     ListagemComponent,
     CardComponent,
     CadastroComponent,
-    FiltroPorTituloPipe
+    FiltroPorTituloPipe,
+    MensagemComponent
   ],
   imports: [
     BrowserModule,
